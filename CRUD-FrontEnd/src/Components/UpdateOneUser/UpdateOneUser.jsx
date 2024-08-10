@@ -1,33 +1,53 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link, useLoaderData, useParams } from "react-router-dom";
+import { js } from "@eslint/js";
 
-const AddUser = () => {
-  const handleAddUser = (e) => {
+const UpdateOneUser = () => {
+  const { id } = useParams();
+  console.log("update-->", id);
+
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/getAOneUser/${id}`)
+      .then((res) => {
+        console.log(res);
+        console.log(res.data);
+        setUser(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
+
+  console.log(user);
+
+  const handleUpdateUser = (e) => {
     e.preventDefault();
-    console.log("add user is working");
+    console.log("update user is working");
     const form = e.target;
     const fName = form.firstName.value;
     const lName = form.lastName.value;
     const uName = form.userName.value;
     const email = form.email.value;
     const password = form.password.value;
-    // console.log(fName, lName, uName, email, password);
-    const newUser = { fName, lName, uName, email, password };
-    console.log(newUser);
+    console.log(fName, lName, uName, email, password);
+    const updateUser = { fName, lName, uName, email, password };
+    console.log(updateUser);
 
-    //send data to server
-    //CREATE
-    fetch("http://localhost:3000/addUser", {
-      method: "POST",
+    fetch(`http://localhost:3000/updateOneUser/${id}`, {
+      method: "PUT",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(newUser),
+      body: JSON.stringify(updateUser),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.acknowledged) {
-          alert("user created successfully");
+        if (data.modifiedCount) {
+          alert("user updated successfully");
         }
       });
+
     form.reset("");
   };
 
@@ -36,10 +56,10 @@ const AddUser = () => {
       <Link to="/" className="btn my-5 text-lg font-bold bg-amber-300">
         Show All User?Go Home Page
       </Link>
-      <h2 className="text-2xl mt-10 underline">Add New User</h2>
+      <h2 className="text-2xl mt-10 underline">Update User</h2>
       <form
         className="mx-auto w-1/2 justify-center items-center"
-        onSubmit={handleAddUser}
+        onSubmit={handleUpdateUser}
       >
         <div className="label">
           <span className="label-text">Your First name?</span>
@@ -48,6 +68,7 @@ const AddUser = () => {
           <input
             type="text"
             name="firstName"
+            defaultValue={user.fName}
             placeholder="Type first name here"
             className="input input-bordered w-full"
           />
@@ -59,6 +80,7 @@ const AddUser = () => {
           <input
             type="text"
             name="lastName"
+            defaultValue={user.lName}
             placeholder="Type last name here"
             className="input input-bordered w-full"
           />
@@ -70,6 +92,7 @@ const AddUser = () => {
           <input
             type="text"
             name="userName"
+            defaultValue={user.uName}
             placeholder="Type User name here"
             className="input input-bordered w-full"
           />
@@ -81,6 +104,7 @@ const AddUser = () => {
           <input
             type="email"
             name="email"
+            defaultValue={user.email}
             placeholder="Type email here"
             className="input input-bordered w-full"
           />
@@ -93,6 +117,7 @@ const AddUser = () => {
           <input
             type="password"
             name="password"
+            defaultValue={user.password}
             placeholder="Type password here"
             className="input input-bordered w-full"
           />
@@ -101,8 +126,8 @@ const AddUser = () => {
         <div>
           <input
             type="submit"
-            value="Add User"
-            className="input input-bordered w-full bg-amber-300 cursor-pointer text-xl font-bold"
+            value="Update User"
+            className="input input-bordered w-full bg-amber-300 cursor-pointer text-lg font-bold"
           />
         </div>
       </form>
@@ -110,4 +135,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default UpdateOneUser;

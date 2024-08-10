@@ -1,9 +1,97 @@
-import React from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useToasterStore } from "react-hot-toast/headless";
+import { FaRegEdit } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Home = () => {
+  const [users, setUsers] = useState([]);
+
+  //READ Data
+  useEffect(() => {
+    const getAllUser = async () => {
+      const responseData = await axios.get("http://localhost:3000/getAllUser");
+      console.log(responseData);
+      console.log(responseData.data);
+      setUsers(responseData.data);
+    };
+    getAllUser();
+  }, []);
+
+  console.log(users);
+
+  //DELETE
+  const handleDelete = (id) => {
+    console.log("delete", id);
+    fetch(`http://localhost:3000/deleteAUser/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount) {
+          alert("deleted successfully");
+          const remainingUser = users.filter((u) => u._id != id);
+          console.log(remainingUser);
+          setUsers(remainingUser);
+        }
+      });
+  };
+
   return (
-    <div>
-      <h2>Hello World-Home</h2>
+    <div className="text-center mx-auto my-10">
+      <Link to="/addUser" className="btn my-5 text-lg font-bold bg-amber-300">
+        Add User ? Go add user Page
+      </Link>
+      <h2 className="p-10 text-2xl underline">All Users In Here-Home Page</h2>
+      <div className="overflow-x-auto ">
+        <table className="table border text-center text-lg">
+          {/* head */}
+          <thead className="border-2">
+            <tr className="text-xl font-bold bg-green-100">
+              <th>S/N</th>
+              <th>User Name</th>
+              <th>Email</th>
+              <th>Edit</th>
+              <th>Delete</th>
+              {/* <th className="text-center"> Actions</th> */}
+            </tr>
+          </thead>
+          <tbody className="border-2 border-y-2">
+            {users.map((user, index) => {
+              return (
+                <tr
+                  className="bg-orange-50 text-center border-2"
+                  key={user._id}
+                >
+                  <th>{index + 1}</th>
+                  <td>{user.uName}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    <Link
+                      to={`/editOneUser/${user._id}`}
+                      className="btn bg-info text-white text-2xl"
+                    >
+                      <FaRegEdit />
+                    </Link>
+                  </td>
+                  <td>
+                    <Link
+                      className="btn bg-red-600 text-white text-2xl"
+                      onClick={() => handleDelete(user._id)}
+                    >
+                      <MdDeleteOutline />
+                    </Link>
+                  </td>
+                  {/* <td className="btn-warning btn">Edit</td>
+              <td className="btn-error btn text-right">Delete</td> */}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

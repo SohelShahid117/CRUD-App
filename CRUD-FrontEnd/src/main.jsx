@@ -1,14 +1,3 @@
-// import { StrictMode } from 'react'
-// import { createRoot } from 'react-dom/client'
-// import App from './App.jsx'
-// import './index.css'
-
-// createRoot(document.getElementById('root')).render(
-//   <StrictMode>
-//     <App />
-//   </StrictMode>,
-// )
-
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -17,6 +6,7 @@ import Root from "./Components/Root/Root";
 import ErrPage from "./Components/ErrPage/ErrPage";
 import Home from "./Components/Home/Home";
 import AddUser from "./Components/AddUser/AddUser";
+import UpdateOneUser from "./Components/UpdateOneUser/UpdateOneUser";
 
 const router = createBrowserRouter([
   {
@@ -28,10 +18,17 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        // loader: () => fetch("http://localhost:3000/getAllUser"),
       },
       {
         path: "/addUser",
         element: <AddUser></AddUser>,
+      },
+      {
+        path: "/editOneUser/:id",
+        element: <UpdateOneUser></UpdateOneUser>,
+        // loader: ({ params }) =>
+        //   fetch(`http://localhost:5173/editOneUser/${params.id}`),
       },
     ],
   },

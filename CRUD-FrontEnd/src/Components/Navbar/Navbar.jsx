@@ -39,8 +39,8 @@ const Navbar = () => {
             {navLinks}
           </ul>
         </div>
-        <NavLink to="/" className="btn btn-ghost text-xl">
-          JS Users
+        <NavLink to="/" className="btn text-2xl bg-green-500 font-bold">
+          JS All Users
         </NavLink>
       </div>
       <div className="navbar-center hidden lg:flex">
