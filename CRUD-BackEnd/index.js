@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 //rDgL6yB1oizenc2T
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 // const uri = "mongodb+srv://<username>:<password>@cluster0.hfhifix.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const uri = "mongodb+srv://crudApp:rDgL6yB1oizenc2T@cluster0.hfhifix.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
@@ -45,6 +45,56 @@ async function run() {
         console.log(result)
         res.send(result)
 
+    })
+
+    //READ
+    app.get("/getAllUser",async(req,res)=>{
+      // const result = await crudUserCollection.find(query, options).toArray();
+      const result = await crudUserCollection.find().toArray();
+      console.log(result)
+      res.send(result)
+    })
+
+    //DELETE
+    app.delete("/deleteAUser/:_id",async(req,res)=>{
+      const _id = req.params._id
+      const query = { _id: new ObjectId(_id )};
+      const result = await crudUserCollection.deleteOne(query)
+      console.log(result)
+      res.send(result)
+
+    })
+
+    //UPDATE-get a single user
+    app.get("/getAOneUser/:_id",async(req,res)=>{
+      const _id = req.params._id
+      const query = { _id: new ObjectId(_id )};
+      const result = await crudUserCollection.findOne(query)
+      console.log(result)
+      res.send(result)
+    })
+
+    //UPDATE
+    app.put("/updateOneUser/:_id",async(req,res)=>{
+      const _id = req.params._id
+      const query = { _id: new ObjectId(_id )};
+
+      const options = { upsert: true };
+      const updateInfo = req.body
+
+      const updateData = {
+        $set: {
+          fName:updateInfo.fName,
+          lName:updateInfo.lName,
+          uName:updateInfo.uName,
+          email:updateInfo.email,
+          password:updateInfo.password 
+        },
+      };
+
+      const result = await crudUserCollection.updateOne(query, updateData, options);
+      console.log(result)
+      res.send(result)
     })
 
 
