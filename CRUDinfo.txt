@@ -1,0 +1,5 @@
+1.akta home page,akta add employee page hobe
+2.add employee page a akta form takbe input hobe email,userName,salary(LPA(BDT)) & submit btn hobe AddEmployee--------->CREATE
+3.home page e all employee k table akare show hobe with,userName,email,salary & edit & delete btn---------------------->READ,DELETE
+4.edit btn er jonno noton akti page hobe ,jekane abar add employee page er form edit korbo----------------------------->UPDATE
+
