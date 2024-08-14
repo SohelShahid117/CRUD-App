@@ -42,7 +42,7 @@ const AddUser = () => {
         onSubmit={handleAddUser}
       >
         <div className="label">
-          <span className="label-text">Your First name?</span>
+          <span className="label-text text-lg">Your First name?</span>
         </div>
         <div className="mb-5">
           <input
@@ -53,7 +53,7 @@ const AddUser = () => {
           />
         </div>
         <div className="label">
-          <span className="label-text">Your Last name?</span>
+          <span className="label-text text-lg">Your Last name?</span>
         </div>
         <div className="mb-5">
           <input
@@ -64,7 +64,7 @@ const AddUser = () => {
           />
         </div>
         <div className="label">
-          <span className="label-text">Your Username name?</span>
+          <span className="label-text text-lg">Your Username name?</span>
         </div>
         <div className="mb-5">
           <input
@@ -75,7 +75,7 @@ const AddUser = () => {
           />
         </div>
         <div className="label">
-          <span className="label-text">Your Email?</span>
+          <span className="label-text text-lg">Your Email?</span>
         </div>
         <div className="mb-5">
           <input
@@ -87,7 +87,7 @@ const AddUser = () => {
         </div>
 
         <div className="label">
-          <span className="label-text">Your Password?</span>
+          <span className="label-text text-lg">Your Password?</span>
         </div>
         <div className="mb-5">
           <input

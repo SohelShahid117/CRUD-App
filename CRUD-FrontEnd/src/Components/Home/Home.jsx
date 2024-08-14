@@ -46,15 +46,15 @@ const Home = () => {
       </Link>
       <h2 className="p-10 text-2xl underline">All Users In Here-Home Page</h2>
       <div className="overflow-x-auto ">
-        <table className="table border text-center text-lg">
+        <table className="table border-2 border-orange-900 text-center text-lg">
           {/* head */}
-          <thead className="border-2">
-            <tr className="text-xl font-bold bg-green-100">
-              <th>S/N</th>
-              <th>User Name</th>
-              <th>Email</th>
-              <th>Edit</th>
-              <th>Delete</th>
+          <thead className="border-2 border-orange-900">
+            <tr className="text-xl font-bold bg-green-100 text-black border-2 border-orange-900">
+              <th className="border-2 border-orange-900">S/N</th>
+              <th className="border-2 border-orange-900">User Name</th>
+              <th className="border-2 border-orange-900">Email</th>
+              <th className="border-2 border-orange-900">Edit</th>
+              <th className="border-2 border-orange-900">Delete</th>
               {/* <th className="text-center"> Actions</th> */}
             </tr>
           </thead>
@@ -62,13 +62,13 @@ const Home = () => {
             {users.map((user, index) => {
               return (
                 <tr
-                  className="bg-orange-50 text-center border-2"
+                  className="bg-orange-50 text-center border-2 border-orange-900"
                   key={user._id}
                 >
-                  <th>{index + 1}</th>
-                  <td>{user.uName}</td>
-                  <td>{user.email}</td>
-                  <td>
+                  <th className="border-2 border-orange-900">{index + 1}</th>
+                  <td className="border-2 border-orange-900">{user.uName}</td>
+                  <td className="border-2 border-orange-900">{user.email}</td>
+                  <td className="border-2 border-orange-900">
                     <Link
                       to={`/editOneUser/${user._id}`}
                       className="btn bg-info text-white text-2xl"
@@ -76,7 +76,7 @@ const Home = () => {
                       <FaRegEdit />
                     </Link>
                   </td>
-                  <td>
+                  <td className="border-2 border-orange-900">
                     <Link
                       className="btn bg-red-600 text-white text-2xl"
                       onClick={() => handleDelete(user._id)}
