@@ -8,17 +8,21 @@ import Home from "./Components/Home/Home";
 import AddUser from "./Components/AddUser/AddUser";
 import UpdateOneUser from "./Components/UpdateOneUser/UpdateOneUser";
 
+//enJoy React
+
 const router = createBrowserRouter([
   {
     path: "/",
     // element: <div>Hello world!</div>,
+    //hello
+    //hello
     element: <Root></Root>,
     errorElement: <ErrPage />,
     children: [
       {
         path: "/",
         element: <Home></Home>,
-        // loader: () => fetch("http://localhost:3000/getAllUser"),
+        // loader: () => fetch("https://crud-app-server-eight.vercel.app/getAllUser"),
       },
       {
         path: "/addUser",

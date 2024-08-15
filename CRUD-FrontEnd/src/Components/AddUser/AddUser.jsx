@@ -16,7 +16,7 @@ const AddUser = () => {
 
     //send data to server
     //CREATE
-    fetch("http://localhost:3000/addUser", {
+    fetch("https://crud-app-server-eight.vercel.app/addUser", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newUser),

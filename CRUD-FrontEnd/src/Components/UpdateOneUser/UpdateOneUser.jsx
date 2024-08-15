@@ -11,7 +11,8 @@ const UpdateOneUser = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/getAOneUser/${id}`)
+      // .get(`https://crud-app-server-eight.vercel.app/getAOneUser/${id}`)
+      .get(`https://crud-app-server-24m9.vercel.app/getAOneUser/${id}`)
       .then((res) => {
         console.log(res);
         console.log(res.data);
@@ -35,7 +36,7 @@ const UpdateOneUser = () => {
     const updateUser = { fName, lName, uName, email, password };
     console.log(updateUser);
 
-    fetch(`http://localhost:3000/updateOneUser/${id}`, {
+    fetch(`https://crud-app-server-24m9.vercel.app/updateOneUser/${id}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(updateUser),

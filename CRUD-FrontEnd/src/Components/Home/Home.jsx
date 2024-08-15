@@ -11,7 +11,9 @@ const Home = () => {
   //READ Data
   useEffect(() => {
     const getAllUser = async () => {
-      const responseData = await axios.get("http://localhost:3000/getAllUser");
+      const responseData = await axios.get(
+        "https://crud-app-server-eight.vercel.app/getAllUser"
+      );
       console.log(responseData);
       console.log(responseData.data);
       setUsers(responseData.data);
@@ -24,7 +26,7 @@ const Home = () => {
   //DELETE
   const handleDelete = (id) => {
     console.log("delete", id);
-    fetch(`http://localhost:3000/deleteAUser/${id}`, {
+    fetch(`https://crud-app-server-eight.vercel.app/deleteAUser/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
