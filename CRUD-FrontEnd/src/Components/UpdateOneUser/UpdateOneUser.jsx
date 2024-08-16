@@ -36,18 +36,31 @@ const UpdateOneUser = () => {
     const updateUser = { fName, lName, uName, email, password };
     console.log(updateUser);
 
-    fetch(`https://crud-app-server-24m9.vercel.app/updateOneUser/${id}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(updateUser),
-    })
-      .then((res) => res.json())
+    // fetch(`https://crud-app-server-24m9.vercel.app/updateOneUser/${id}`, {
+    //   method: "PUT",
+    //   headers: { "content-type": "application/json" },
+    //   body: JSON.stringify(updateUser),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.modifiedCount) {
+    //       alert("user updated successfully");
+    //     }
+    //   });
+
+    axios
+      .put(
+        `https://crud-app-server-24m9.vercel.app/updateOneUser/${id}`,
+        updateUser
+      )
       .then((data) => {
-        console.log(data);
-        if (data.modifiedCount) {
-          alert("user updated successfully");
+        console.log(data.data);
+        if (data.data.modifiedCount) {
+          alert("congratulations!!! data updated successfully");
         }
-      });
+      })
+      .catch((err) => console.log(err));
 
     form.reset("");
   };

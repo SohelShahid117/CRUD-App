@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Link } from "react-router-dom";
 
 const AddUser = () => {
@@ -16,18 +17,31 @@ const AddUser = () => {
 
     //send data to server
     //CREATE
-    fetch("https://crud-app-server-eight.vercel.app/addUser", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(newUser),
-    })
-      .then((res) => res.json())
+
+    //using fetch
+    // fetch("https://crud-app-server-eight.vercel.app/addUser", {
+    //   method: "POST",
+    //   headers: { "content-type": "application/json" },
+    //   body: JSON.stringify(newUser),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.acknowledged) {
+    //       alert("user created successfully");
+    //     }
+    //   });
+
+    //using axios
+    axios
+      .post("https://crud-app-server-eight.vercel.app/addUser", newUser)
       .then((data) => {
-        console.log(data);
-        if (data.acknowledged) {
-          alert("user created successfully");
+        console.log(data.data);
+        if (data.data.acknowledged) {
+          alert("Congratulations!!! data insert hoyeche");
         }
-      });
+      })
+      .catch((err) => console.log(err));
     form.reset("");
   };
 
