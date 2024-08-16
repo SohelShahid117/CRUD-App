@@ -8,7 +8,18 @@ import Home from "./Components/Home/Home";
 import AddUser from "./Components/AddUser/AddUser";
 import UpdateOneUser from "./Components/UpdateOneUser/UpdateOneUser";
 
-//enJoy React
+import {
+  // useQuery,
+  // useMutation,
+  // useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+// import { getTodos, postTodo } from "../my-api";
+import Users from "./Components/Users/Users";
+
+// Create a client
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -34,12 +45,20 @@ const router = createBrowserRouter([
         // loader: ({ params }) =>
         //   fetch(`http://localhost:5173/editOneUser/${params.id}`),
       },
+      {
+        path: "/users",
+        element: <Users></Users>,
+      },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  // Provide the client to your App
+  <QueryClientProvider client={queryClient}>
+    {/* <Todos /> */}
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </QueryClientProvider>
 );
